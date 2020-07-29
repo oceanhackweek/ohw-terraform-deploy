@@ -10,4 +10,4 @@ map_users = [{
 }]
 
 # Name of your cluster
-cluster_name = "<cluster-name>"
+name_prefix = "<cluster-name>"
