@@ -11,7 +11,7 @@ terraform {
 # Can't store this state, unfortunately
 #terraform {
 #  backend "s3" {
-#    bucket         = "hackweek-terraform-state-bucket"
+#    bucket         = "${var.name_prefix}terraform-state-bucket"
 #    key            = ""
 #    region         = "us-west-2"
 #    encrypt        = true
@@ -32,7 +32,7 @@ output "s3_bucket_arn" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket        = var.bucket_name
+  bucket        = "${var.name_prefix}terraform-state-bucket"
   force_destroy = true
   versioning {
     enabled = true
@@ -47,5 +47,6 @@ resource "aws_s3_bucket" "terraform_state" {
   tags = {
     Owner = split("/", data.aws_caller_identity.current.arn)[1]
     AutoTag_Creator = data.aws_caller_identity.current.arn
+    Project = "${var.name_prefix}project"
   }
 }
