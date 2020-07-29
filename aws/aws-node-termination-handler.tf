@@ -1,7 +1,3 @@
-terraform {
-  required_version = ">= 0.12.6"
-}
-
 data "helm_repository" "eks" {
   name = "eks"
   url  = "https://aws.github.io/eks-charts"
