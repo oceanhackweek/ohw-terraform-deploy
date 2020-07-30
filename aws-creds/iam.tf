@@ -184,12 +184,15 @@ data "aws_iam_policy_document" "terraform_iam_policy_source" {
       "iam:UpdateAssumeRolePolicy",
       "s3:CreateBucket",
       "s3:DeleteBucket",
+      "s3:DeleteBucketVersion",
       "s3:DescribeJob",
       "s3:Get*",
       "s3:HeadBucket",
       "s3:List*",
       "s3:PutBucketAcl",
-      "s3:PutBucketTagging"
+      "s3:PutBucketTagging",
+      "s3:PutBucketVersion",
+      "s3:PutEncryptionConfiguration"
     ]
 
     resources = ["*"]
