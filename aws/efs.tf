@@ -105,7 +105,7 @@ resource "kubernetes_persistent_volume" "shared-efs-volume-staging" {
     persistent_volume_source {
       nfs {
         server = aws_efs_file_system.home_dirs.dns_name
-        path = "/icesat-2.hackweek.io/shared/"
+        path = "/ocean.hackweek.io/shared/"
       }
     }
     storage_class_name = "manual-sc"
@@ -145,7 +145,7 @@ resource "kubernetes_persistent_volume" "shared-efs-volume-prod" {
     persistent_volume_source {
       nfs {
         server = aws_efs_file_system.home_dirs.dns_name
-        path = "/icesat-2.hackweek.io/shared/"
+        path = "/ocean.hackweek.io/shared/"
       }
     }
     storage_class_name = "manual-sc"
@@ -186,7 +186,7 @@ resource "kubernetes_persistent_volume" "tutorial-data-volume" {
     persistent_volume_source {
       nfs {
         server = aws_efs_file_system.home_dirs.dns_name
-        path = "/icesat-2.hackweek.io/tutorial-data/"
+        path = "/ocean.hackweek.io/tutorial-data/"
         read_only = true
       }
     }
