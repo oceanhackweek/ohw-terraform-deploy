@@ -38,6 +38,17 @@ resource "aws_efs_mount_target" "home_dirs_targets" {
   security_groups = [ aws_security_group.home_dirs_sg.id ]
 }
 
+resource "kubernetes_namespace" "staging" {
+  metadata {
+    name = "${var.name_prefix}hub-staging"
+  }
+}
+
+resource "kubernetes_namespace" "prod" {
+  metadata {
+    name = "${var.name_prefix}hub-prod"
+  }
+}
 
 resource "kubernetes_namespace" "support" {
   metadata {
@@ -104,7 +115,7 @@ resource "kubernetes_persistent_volume" "shared-efs-volume" {
 resource "kubernetes_persistent_volume_claim" "shared-efs-claim" {
   metadata {
     name = "shared-nfs"
-    namespace = "hackweek-hub-staging"
+    namespace = kubernetes_namespace.staging.metadata.0.name
   }
 
   spec {
@@ -144,7 +155,7 @@ resource "kubernetes_persistent_volume" "shared-efs-volume-prod" {
 resource "kubernetes_persistent_volume_claim" "shared-efs-claim-prod" {
   metadata {
     name = "shared-nfs"
-    namespace = "hackweek-hub-prod"
+    namespace = kubernetes_namespace.prod.metadata.0.name
   }
 
   spec {
@@ -186,7 +197,7 @@ resource "kubernetes_persistent_volume" "tutorial-data-volume" {
 resource "kubernetes_persistent_volume_claim" "tutorial-data-claim" {
   metadata {
     name = "${var.name_prefix}tutorial-data-claim"
-    namespace = "hackweek-hub-prod"
+    namespace = kubernetes_namespace.prod.metadata.0.name
   }
 
   spec {

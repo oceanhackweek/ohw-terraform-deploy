@@ -64,8 +64,8 @@ module "iam_assumable_role_bucket_access" {
   role_name                     = "${var.name_prefix}bucket-access-serviceaccount"
   provider_url                  = replace(module.eks.cluster_oidc_issuer_url, "https://", "")
   role_policy_arns              = [aws_iam_policy.hackweek-bucket-access-policy.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:hackweek-hub-staging:jovyan",
-                                   "system:serviceaccount:hackweek-hub-prod:jovyan"]
+  oidc_fully_qualified_subjects = ["system:serviceaccount:${kubernetes_namespace.staging.metadata.0.name}:jovyan",
+                                   "system:serviceaccount:${kubernetes_namespace.prod.metadata.0.name}:jovyan"]
 
   tags = {
     Owner = split("/", data.aws_caller_identity.current.arn)[1]
