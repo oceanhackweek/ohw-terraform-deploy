@@ -105,7 +105,7 @@ module "eks" {
       asg_max_size            = 1
       asg_min_size            = 1
       asg_desired_capacity    = 1
-      instance_type           = ["t3a.xlarge", "t3a.xlarge"]
+      override_instance_types = ["t3a.xlarge", "t3.xlarge"]
       spot_instance_pools     = 2
       subnets                 = [module.vpc.private_subnets[0]]
 
