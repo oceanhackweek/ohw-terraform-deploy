@@ -20,7 +20,7 @@ resource "kubernetes_storage_class" "prometheus-storageclass" {
 resource "helm_release" "prometheus" {
   name = "prometheus"
   namespace = kubernetes_namespace.prometheus.metadata.0.name
-  repository = data.helm_repository.stable.metadata[0].name
+  repository = "https://kubernetes-charts.storage.googleapis.com"
   chart = "prometheus"
   version = "11.2.1"
 
@@ -38,7 +38,7 @@ resource "kubernetes_namespace" "grafana" {
 resource "helm_release" "grafana" {
   name = "grafana"
   namespace = kubernetes_namespace.grafana.metadata.0.name
-  repository = data.helm_repository.stable.metadata[0].name
+  repository = "https://kubernetes-charts.storage.googleapis.com"
   chart = "grafana"
   depends_on = [helm_release.prometheus]
   version = "~5.0.24"
