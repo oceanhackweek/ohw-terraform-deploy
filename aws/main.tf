@@ -56,19 +56,19 @@ module "vpc" {
   single_nat_gateway   = true
 
   tags = {
-    "kubernetes.io/cluster/${module.eks.cluster_id}" = "shared"
+    "kubernetes.io/cluster/${var.name_prefix}cluster" = "shared"
     Owner = split("/", data.aws_caller_identity.current.arn)[1]
     AutoTag_Creator = data.aws_caller_identity.current.arn
     Project = "${var.name_prefix}project"
   }
 
   public_subnet_tags = {
-    "kubernetes.io/cluster/${module.eks.cluster_id}" = "shared"
+    "kubernetes.io/cluster/${var.name_prefix}cluster" = "shared"
     "kubernetes.io/role/elb"                    = "1"
   }
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/${module.eks.cluster_id}" = "shared"
+    "kubernetes.io/cluster/${var.name_prefix}cluster" = "shared"
     "kubernetes.io/role/internal-elb"           = "1"
   }
 }
@@ -119,7 +119,7 @@ module "eks" {
           "value"               = "true"
         },
         {
-          "key"                 = "k8s.io/cluster-autoscaler/${module.eks.cluster_id}"
+          "key"                 = "k8s.io/cluster-autoscaler/${var.name_prefix}cluster"
           "propagate_at_launch" = "false"
           "value"               = "true"
         }
@@ -153,7 +153,7 @@ module "eks" {
           "value"               = "true"
         },
         {
-          "key"                 = "k8s.io/cluster-autoscaler/${module.eks.cluster_id}"
+          "key"                 = "k8s.io/cluster-autoscaler/${var.name_prefix}cluster"
           "propagate_at_launch" = "false"
           "value"               = "true"
         }
@@ -187,7 +187,7 @@ module "eks" {
           "value"               = "true"
         },
         {
-          "key"                 = "k8s.io/cluster-autoscaler/${module.eks.cluster_id}"
+          "key"                 = "k8s.io/cluster-autoscaler/${var.name_prefix}cluster"
           "propagate_at_launch" = "false"
           "value"               = "true"
         }

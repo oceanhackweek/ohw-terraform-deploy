@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "hackweek-bucket-access-permissions" {
   version = "2012-10-17"
 
   statement {
-    sid       = "${var.name_prefix}DataBucketListAccess"
+    sid       = "${split("-",var.name_prefix)[0]}DataBucketListAccess"
 
     effect    = "Allow"
 
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "hackweek-bucket-access-permissions" {
   }
 
   statement {
-    sid       = "${var.name_prefix}DataBucketReadWriteAccess"
+    sid       = "${split("-",var.name_prefix)[0]}DataBucketReadWriteAccess"
 
     effect    = "Allow"
 
