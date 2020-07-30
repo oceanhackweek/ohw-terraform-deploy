@@ -34,9 +34,6 @@ output "s3_bucket_arn" {
 resource "aws_s3_bucket" "terraform_state" {
   bucket        = "${var.name_prefix}terraform-state-bucket"
   force_destroy = true
-  versioning {
-    enabled = true
-  }
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
