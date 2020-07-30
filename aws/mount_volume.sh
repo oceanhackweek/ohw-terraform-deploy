@@ -6,6 +6,5 @@ yum install -y amazon-efs-utils
 MOUNTPOINT=/mnt/efs
 mkdir $MOUNTPOINT
 
-# NEED TO CHANGE FS ID
-sudo mount -t efs fs-382b4792:/ $MOUNTPOINT
+sudo mount -t efs fs-cea205cb:/ $MOUNTPOINT
 echo "Ephemeral disk mounted to $MOUNTPOINT"
