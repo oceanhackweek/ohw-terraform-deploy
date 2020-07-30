@@ -2,7 +2,11 @@
 # The minimal policy set is found here: 
 # https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/iam-permissions.md
 # Here are a few implementations
-
+provider "aws" {
+  version = "2.59.0"
+  region  = var.region
+  profile = var.profile
+}
 
 # Create a new user named terraform-bot
 # Create policy in IAM and attach to terraform-bot
@@ -11,11 +15,11 @@
 # This is what I do for pangeo
 
 resource "aws_iam_user" "user" {
-  name = "terraform-bot"
+  name = "${var.name_prefix}terraform-bot"
 }
 
 resource "aws_iam_policy" "terraform_iam_policy" {
-    name = "terraform-policy"
+    name = "${var.name_prefix}terraform-policy"
     path = "/"
     description = "Permissions for Terraform-controlled EKS cluster creation and management"
     policy = data.aws_iam_policy_document.terraform_iam_policy_source.json
