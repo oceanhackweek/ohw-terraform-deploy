@@ -92,7 +92,7 @@ resource "helm_release" "efs-provisioner" {
   }
 }
 
-resource "kubernetes_persistent_volume" "shared-efs-volume" {
+resource "kubernetes_persistent_volume" "shared-efs-volume-staging" {
   metadata {
     name = "${var.name_prefix}staging-shared-nfs"
   }
@@ -112,7 +112,7 @@ resource "kubernetes_persistent_volume" "shared-efs-volume" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "shared-efs-claim" {
+resource "kubernetes_persistent_volume_claim" "shared-efs-claim-staging" {
   metadata {
     name = "shared-nfs"
     namespace = kubernetes_namespace.staging.metadata.0.name
@@ -125,7 +125,7 @@ resource "kubernetes_persistent_volume_claim" "shared-efs-claim" {
         storage = "1Mi"
       }
     }
-    volume_name = kubernetes_persistent_volume.shared-efs-volume.metadata.0.name
+    volume_name = kubernetes_persistent_volume.shared-efs-volume-staging.metadata.0.name
     storage_class_name = "manual-sc"
   }
 
