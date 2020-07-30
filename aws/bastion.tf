@@ -12,6 +12,12 @@ resource "aws_instance" "ecs-optimized" {
     AutoTag_Creator = data.aws_caller_identity.current.arn
     Project = "${var.name_prefix}project"
   }
+
+  volume_tags = {
+    Owner = split("/", data.aws_caller_identity.current.arn)[1]
+    AutoTag_Creator = data.aws_caller_identity.current.arn
+    Project = "${var.name_prefix}project"
+  }
 }
 
 resource "aws_security_group" "ecs-test" {
