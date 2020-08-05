@@ -44,7 +44,8 @@ resource "helm_release" "grafana" {
   version = "~5.0.24"
 
   values = [
-    file("grafana-values-min.yaml")
+    file("grafana-values-min.yaml"),
+    file("../../support/secret-grafana-settings.yaml")
   ]
 
   set {
