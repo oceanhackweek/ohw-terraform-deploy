@@ -59,7 +59,7 @@ data "aws_iam_policy_document" "hackweek-bucket-access-permissions" {
 # I have applied the PR manually in the meantime and it works
 module "iam_assumable_role_bucket_access" {
   source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version                       = "~> v2.6.0"
+  version                       = "~> v2.12.0"
   create_role                   = true
   role_name                     = "${var.name_prefix}bucket-access-serviceaccount"
   provider_url                  = replace(module.eks.cluster_oidc_issuer_url, "https://", "")
