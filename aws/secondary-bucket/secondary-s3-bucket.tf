@@ -67,7 +67,7 @@ data "aws_iam_policy_document" "hackweek-second-bucket-access-permissions" {
     ]
 
     resources = [
-      aws_s3_bucket.hackweek-second-bucket.arn
+      "${aws_s3_bucket.hackweek-second-bucket.arn}/*"
     ]
   }
 }
